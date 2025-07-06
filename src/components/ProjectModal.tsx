@@ -13,7 +13,8 @@ interface Project {
   title: string;
   desc: string;
   images: string[];
-  stack?: string[]; // ✅ stack is now optional but supported
+  stack?: string[];
+  link?: string;
 }
 
 interface ProjectModalProps {
@@ -114,6 +115,19 @@ export default function ProjectModal({ open, onClose, project }: ProjectModalPro
               </div>
             </>
           )}
+
+          {/* View Project Button */}
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-6 px-6 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-full shadow-md hover:bg-yellow-300 transition"
+            >
+              View Project →
+            </a>
+          )}
+
         </div>
       </div>
     </Dialog>
