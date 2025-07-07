@@ -1,5 +1,6 @@
 const isProd = process.env.NODE_ENV === "production";
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: isProd ? "/Web-Portfolio-Coligado" : "",
   assetPrefix: isProd ? "/Web-Portfolio-Coligado/" : "",
@@ -7,9 +8,6 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     unoptimized: true,
-  },
-  env: {
-    NEXT_PUBLIC_BASE_PATH: isProd ? "/Web-Portfolio-Coligado" : "",
   },
 };
 
