@@ -1,11 +1,8 @@
 name: Deploy Next.js site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
@@ -68,16 +65,13 @@ jobs:
       - name: 🔨 Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
 
-      - name: 🚀 Export static site
-        run: ${{ steps.detect-package-manager.outputs.runner }} next export
-
       - name: 🚫 Add .nojekyll file
         run: touch out/.nojekyll
 
       - name: 📤 Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: out
 
   deploy:
     environment:
