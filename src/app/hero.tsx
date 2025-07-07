@@ -17,7 +17,7 @@ export default function Hero() {
             variant="small"
             className="uppercase text-blue-400 font-semibold tracking-wider mb-3"
           >
-            Hello, I'm Cliff
+            Hello, I&apos;m Cliff
           </Typography>
           <Typography
             variant="h1"
@@ -31,7 +31,7 @@ export default function Hero() {
             variant="lead"
             className="text-gray-300 max-w-xl mx-auto lg:mx-0"
           >
-            I'm <strong className="text-white">Cliff Marvic M. Coligado</strong>, a graduating Computer Science student passionate about clean design,
+            I&apos;m <strong className="text-white">Cliff Marvic M. Coligado</strong>, a graduating Computer Science student passionate about clean design,
             frontend development, and building responsive, accessible user interfaces.
           </Typography>
         </div>

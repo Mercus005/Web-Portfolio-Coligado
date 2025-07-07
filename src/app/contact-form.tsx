@@ -79,7 +79,7 @@ export function ContactForm() {
 
           <div className="w-full flex items-center justify-center p-10">
             <Typography variant="lead" className="text-gray-600 text-center">
-              I'm excited to connect and share my passion for web development. Whether it's a project, collaboration, or opportunity to grow, I'm eager to contribute and learn through building meaningful digital experiences.
+              I&apos;m excited to connect and share my passion for web development. Whether it&apos;s a project, collaboration, or opportunity to grow, I&apos;m eager to contribute and learn through building meaningful digital experiences.
             </Typography>
           </div>
         </CardBody>
