@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 @layer utilities {
   .animate-fade-in-up {
     animation: fadeInUp 1s ease-out both;
@@ -20,7 +38,7 @@
 }
 /* For 3D flip card effect */
 .perspective {
-  perspective: 1000px;
+  perspective: 100px;
 }
 .transform-style-preserve-3d {
   transform-style: preserve-3d;
@@ -33,6 +51,6 @@
 }
 /* globals.css */
 .mask-fade {
-  mask-image: radial-gradient(ellipse 80% 80% at center, black 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 80% at center, black 90%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 80% 80% at center, black 60%, transparent 100%);
 }
