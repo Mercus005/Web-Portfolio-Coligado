@@ -57,7 +57,8 @@ export function ContactForm() {
             <div className="flex gap-5 mb-8">
               <TicketIcon className="h-6 w-6 text-white" />
               <Typography variant="h6" color="white">
-                www.linkedin.com/in/cmmcoligado 
+                www.linkedin.com/in/cmmcoligado
+                https://github.com/Mercus005
               </Typography>
             </div>
 
