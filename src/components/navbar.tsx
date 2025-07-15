@@ -33,7 +33,7 @@ function NavItem({ children, href }: NavItemProps) {
     <li>
       <a
         href={href || "#"}
-        className="flex items-center gap-2 font-medium text-gray-200 hover:text-blue-400 transition-colors duration-200"
+        className="flex items-center gap-1.5 sm:gap-2 font-medium text-gray-200 hover:text-blue-400 transition-colors duration-200 text-sm sm:text-base"
       >
         {children}
       </a>
@@ -57,18 +57,18 @@ export function Navbar() {
     <MTNavbar
       shadow={false}
       fullWidth
-      className="sticky top-0 z-50 border-0 bg-gray-900 text-white backdrop-blur-md"
+      className="sticky top-0 z-50 border-0 bg-gray-900 text-white backdrop-blur-md px-4 sm:px-6"
     >
-      <div className="container mx-auto flex items-center justify-between py-3">
-        <Typography className="text-lg font-bold text-white">
+      <div className="container mx-auto flex items-center justify-between py-2 sm:py-3">
+        <Typography className="text-base sm:text-lg font-bold text-white truncate max-w-[200px] sm:max-w-none">
           Cliff Marvic M. Coligado - Portfolio
         </Typography>
 
         {/* Desktop Menu */}
-        <ul className="hidden items-center gap-8 lg:flex">
+        <ul className="hidden items-center gap-4 sm:gap-6 lg:gap-8 lg:flex">
           {NAV_MENU.map(({ name, icon: Icon, href }) => (
             <NavItem key={name} href={href}>
-              <Icon className="h-5 w-5" />
+              <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               {name}
             </NavItem>
           ))}
@@ -79,22 +79,22 @@ export function Navbar() {
           variant="text"
           color="white"
           onClick={handleOpen}
-          className="ml-auto lg:hidden"
+          className="ml-auto lg:hidden h-8 w-8 sm:h-10 sm:w-10"
         >
           {open ? (
-            <XMarkIcon strokeWidth={2} className="h-6 w-6" />
+            <XMarkIcon strokeWidth={2} className="h-5 w-5 sm:h-6 sm:w-6" />
           ) : (
-            <Bars3Icon strokeWidth={2} className="h-6 w-6" />
+            <Bars3Icon strokeWidth={2} className="h-5 w-5 sm:h-6 sm:w-6" />
           )}
         </IconButton>
       </div>
 
       {/* Mobile Menu */}
       <Collapse open={open}>
-        <ul className="flex flex-col gap-4 px-6 pb-4 lg:hidden">
+        <ul className="flex flex-col gap-3 px-4 sm:px-6 pb-4 lg:hidden">
           {NAV_MENU.map(({ name, icon: Icon, href }) => (
             <NavItem key={name} href={href}>
-              <Icon className="h-5 w-5" />
+              <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               {name}
             </NavItem>
           ))}

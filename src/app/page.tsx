@@ -198,6 +198,7 @@ export default function Portfolio() {
               <div ref={el => sectionRefs.current[6] = el} className="">
                 <ContactForm />
               </div>
+
             </motion.div>
           </AnimatePresence>
         </div>
