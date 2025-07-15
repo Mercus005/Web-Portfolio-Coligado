@@ -58,27 +58,31 @@ export default function Projects() {
   };
 
   return (
-    <section className="py-10 px-8 bg-gray-900 text-gray-100" id="projects">
-  <div className="container mx-auto mb-20 text-center">
-    <Typography variant="h2" color="white" className="mb-4">
-      My Projects
-    </Typography>
-
-  </div>
-
-      <div className="container mx-auto grid grid-cols-1 gap-x-10 md:grid-cols-2 xl:grid-cols-3">
-        {PROJECTS.map((project, idx) => (
-          <div key={idx} onClick={() => handleCardClick(project)} className="cursor-pointer">
-            <ProjectCard {...project} />
-          </div>
-        ))}
-      </div>
-
-      <ProjectModal
-        open={openModal}
-        onClose={() => setOpenModal(false)}
-        project={selectedProject}
-      />
-    </section>
+    <section className="py-10 px-4 sm:px-6 lg:px-8 bg-gray-900 text-gray-100" id="projects">
+    <div className="max-w-7xl mx-auto mb-16 text-center">
+      <Typography variant="h2" color="white" className="mb-6 text-3xl sm:text-4xl">
+        My Projects
+      </Typography>
+    </div>
+  
+    <div className="max-w-7xl mx-auto grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {PROJECTS.map((project, idx) => (
+        <div
+        key={idx}
+        onClick={() => handleCardClick(project)}
+        className="cursor-pointer transform transition hover:scale-[1.03] mx-auto w-full max-w-xs sm:max-w-sm"
+      >
+        <ProjectCard {...project} />
+      </div>      
+      ))}
+    </div>
+  
+    <ProjectModal
+      open={openModal}
+      onClose={() => setOpenModal(false)}
+      project={selectedProject}
+    />
+  </section>
+  
   );
 }
