@@ -12,6 +12,7 @@ import Resume from "./resume";
 import Testimonial from "./testimonial";
 import PopularClients from "./popular-clients";
 import ContactForm from "./contact-form";
+import Internship from "./internship";
 import { useRef, useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -183,15 +184,18 @@ export default function Portfolio() {
                 <Resume />
               </div>
               <div ref={el => sectionRefs.current[2] = el} className="">
-                <Clients />
+                <Internship />
               </div>
               <div ref={el => sectionRefs.current[3] = el} className="">
-                <Skills />
+                <Clients />
               </div>
               <div ref={el => sectionRefs.current[4] = el} className="">
-                <Projects />
+                <Skills />
               </div>
               <div ref={el => sectionRefs.current[5] = el} className="">
+                <Projects />
+              </div>
+              <div ref={el => sectionRefs.current[6] = el} className="">
                 <ContactForm />
               </div>
             </motion.div>
@@ -201,7 +205,7 @@ export default function Portfolio() {
         {/* Navigation Dots */}
         <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50">
           <div className="flex flex-col gap-3">
-            {[0, 1, 2, 3, 4, 5].map((index) => (
+            {[0, 1, 2, 3, 4, 5, 6].map((index) => (
               <button
                 key={index}
                 onClick={() => {

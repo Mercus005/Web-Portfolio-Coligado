@@ -13,11 +13,13 @@ import {
   CommandLineIcon,
   XMarkIcon,
   Bars3Icon,
+  BriefcaseIcon,
 } from "@heroicons/react/24/solid";
 
 const NAV_MENU = [
   { name: "About", icon: UserCircleIcon, href: "#about" },
   { name: "Projects", icon: RectangleStackIcon, href: "#projects" },
+  { name: "Internship", icon: BriefcaseIcon, href: "#internship" },
   { name: "Contact", icon: CommandLineIcon, href: "#contact" },
 ];
 
