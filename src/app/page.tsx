@@ -1,7 +1,8 @@
 "use client";
 
 // components
-import { Navbar, Footer } from "../components";
+import { Footer } from "../components";
+import Navbar from "../components/navbar";
 
 // sections
 import Hero from "./hero";
@@ -22,22 +23,38 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState(0);
   const [direction, setDirection] = useState(0);
   const touchStartY = useRef(0);
-  
+
   const scrollToSection = useCallback((index: number, newDirection: number) => {
     const totalSections = sectionRefs.current.length;
     if (index >= 0 && index < totalSections) {
       setDirection(newDirection);
       setActiveSection(index);
-      const navbarHeight = 64; // 4rem = 64px
+      const navbarHeight = 64;
       const sectionEl = sectionRefs.current[index];
       if (sectionEl && containerRef.current) {
         containerRef.current.scrollTo({
           top: sectionEl.offsetTop,
-          behavior: "instant"
+          behavior: "smooth",
         });
       }
     }
   }, []);
+
+  const handleNavClick = (sectionId: string) => {
+    const indexMap: Record<string, number> = {
+      about: 0,
+      resume: 1,
+      internship: 2,
+      clients: 3,
+      skills: 4,
+      projects: 5,
+      contact: 6,
+    };
+    const index = indexMap[sectionId];
+    if (index !== undefined) {
+      scrollToSection(index, index > activeSection ? 1 : -1);
+    }
+  };
 
   useEffect(() => {
     let isScrolling = false;
@@ -46,7 +63,6 @@ export default function Portfolio() {
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      
       if (isScrolling) return;
       isScrolling = true;
 
@@ -61,7 +77,7 @@ export default function Portfolio() {
 
       setTimeout(() => {
         isScrolling = false;
-      }, 400); // Faster reset for more responsive feel
+      }, 400);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -96,13 +112,11 @@ export default function Portfolio() {
 
     const handleTouchMove = (e: TouchEvent) => {
       if (isScrolling) return;
-      
       const touchEndY = e.touches[0].clientY;
       const deltaY = touchStartY.current - touchEndY;
-      
-      if (Math.abs(deltaY) > 50) { // Minimum swipe distance
+
+      if (Math.abs(deltaY) > 50) {
         isScrolling = true;
-        
         if (deltaY > 0 && currentSection < totalSections - 1) {
           scrollToSection(currentSection + 1, 1);
           currentSection++;
@@ -121,7 +135,9 @@ export default function Portfolio() {
     if (container) {
       container.addEventListener("wheel", handleWheel, { passive: false });
       container.addEventListener("touchstart", handleTouchStart);
-      container.addEventListener("touchmove", handleTouchMove, { passive: false });
+      container.addEventListener("touchmove", handleTouchMove, {
+        passive: false,
+      });
       window.addEventListener("keydown", handleKeyDown);
     }
 
@@ -139,27 +155,27 @@ export default function Portfolio() {
     enter: (direction: number) => ({
       y: direction > 0 ? 50 : -50,
       opacity: 0,
-      scale: 0.98
+      scale: 0.98,
     }),
     center: {
       y: 0,
       opacity: 1,
-      scale: 1
+      scale: 1,
     },
     exit: (direction: number) => ({
       y: direction < 0 ? 60 : -40,
       opacity: 0,
-      scale: 0.98
-    })
+      scale: 0.98,
+    }),
   };
 
   return (
     <div className="min-h-screen bg-gray-950">
-      <Navbar />
+      <Navbar onNavClick={handleNavClick} />
       <main
         ref={containerRef}
         className="relative overflow-auto"
-        style={{ marginTop: '0rem', height: 'calc(100vh - 4rem)' }}
+        style={{ marginTop: "0rem", height: "calc(100vh - 4rem)" }}
       >
         <div className="relative">
           <AnimatePresence initial={false} mode="wait" custom={direction}>
@@ -173,32 +189,59 @@ export default function Portfolio() {
               transition={{
                 y: { type: "spring", stiffness: 800, damping: 35 },
                 opacity: { duration: 0.1 },
-                scale: { duration: 0.15 }
+                scale: { duration: 0.15 },
               }}
               className="w-full"
             >
-              <div ref={el => sectionRefs.current[0] = el} className="">
+              <div
+                id="about"
+                ref={(el) => (sectionRefs.current[0] = el)}
+                className="scroll-mt-16"
+              >
                 <Hero />
               </div>
-              <div ref={el => sectionRefs.current[1] = el} className="">
+              <div
+                id="resume"
+                ref={(el) => (sectionRefs.current[1] = el)}
+                className="scroll-mt-16"
+              >
                 <Resume />
               </div>
-              <div ref={el => sectionRefs.current[2] = el} className="">
+              <div
+                id="internship"
+                ref={(el) => (sectionRefs.current[2] = el)}
+                className="scroll-mt-16"
+              >
                 <Internship />
               </div>
-              <div ref={el => sectionRefs.current[3] = el} className="">
+              <div
+                id="clients"
+                ref={(el) => (sectionRefs.current[3] = el)}
+                className="scroll-mt-16"
+              >
                 <Clients />
               </div>
-              <div ref={el => sectionRefs.current[4] = el} className="">
+              <div
+                id="skills"
+                ref={(el) => (sectionRefs.current[4] = el)}
+                className="scroll-mt-16"
+              >
                 <Skills />
               </div>
-              <div ref={el => sectionRefs.current[5] = el} className="">
+              <div
+                id="projects"
+                ref={(el) => (sectionRefs.current[5] = el)}
+                className="scroll-mt-16"
+              >
                 <Projects />
               </div>
-              <div ref={el => sectionRefs.current[6] = el} className="">
+              <div
+                id="contact"
+                ref={(el) => (sectionRefs.current[6] = el)}
+                className="scroll-mt-16"
+              >
                 <ContactForm />
               </div>
-
             </motion.div>
           </AnimatePresence>
         </div>
@@ -209,13 +252,13 @@ export default function Portfolio() {
             {[0, 1, 2, 3, 4, 5, 6].map((index) => (
               <button
                 key={index}
-                onClick={() => {
-                  scrollToSection(index, index > activeSection ? 1 : -1);
-                }}
+                onClick={() =>
+                  scrollToSection(index, index > activeSection ? 1 : -1)
+                }
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  activeSection === index 
-                    ? 'bg-white scale-125' 
-                    : 'bg-gray-500 hover:bg-gray-400'
+                  activeSection === index
+                    ? "bg-white scale-125"
+                    : "bg-gray-500 hover:bg-gray-400"
                 }`}
                 aria-label={`Go to section ${index + 1}`}
               />

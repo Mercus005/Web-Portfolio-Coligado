@@ -18,21 +18,27 @@ import {
 
 const NAV_MENU = [
   { name: "About", icon: UserCircleIcon, href: "#about" },
-  { name: "Projects", icon: RectangleStackIcon, href: "#projects" },
+  { name: "Resume", icon: RectangleStackIcon, href: "#resume" },
   { name: "Internship", icon: BriefcaseIcon, href: "#internship" },
+  { name: "Clients", icon: UserCircleIcon, href: "#clients" },
+  { name: "Skills", icon: CommandLineIcon, href: "#skills" },
+  { name: "Projects", icon: RectangleStackIcon, href: "#projects" },
   { name: "Contact", icon: CommandLineIcon, href: "#contact" },
 ];
+
 
 interface NavItemProps {
   children: React.ReactNode;
   href?: string;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
-function NavItem({ children, href }: NavItemProps) {
+function NavItem({ children, href, onClick }: NavItemProps) {
   return (
     <li>
       <a
         href={href || "#"}
+        onClick={onClick}
         className="flex items-center gap-1.5 sm:gap-2 font-medium text-gray-200 hover:text-blue-400 transition-colors duration-200 text-sm sm:text-base"
       >
         {children}
@@ -41,7 +47,11 @@ function NavItem({ children, href }: NavItemProps) {
   );
 }
 
-export function Navbar() {
+interface NavbarProps {
+  onNavClick?: (sectionId: string) => void;
+}
+
+export function Navbar({ onNavClick }: NavbarProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -53,6 +63,15 @@ export function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    if (onNavClick) {
+      const sectionId = href.replace("#", "");
+      onNavClick(sectionId);
+    }
+    setOpen(false); // Close mobile menu
+  };
+
   return (
     <MTNavbar
       shadow={false}
@@ -61,13 +80,17 @@ export function Navbar() {
     >
       <div className="container mx-auto flex items-center justify-between py-2 sm:py-3">
         <Typography className="text-base sm:text-lg font-bold text-white truncate max-w-[200px] sm:max-w-none">
-          Cliff Marvic M. Coligado - Portfolio
+          Cliff Marvic M. Coligado
         </Typography>
 
         {/* Desktop Menu */}
         <ul className="hidden items-center gap-4 sm:gap-6 lg:gap-8 lg:flex">
           {NAV_MENU.map(({ name, icon: Icon, href }) => (
-            <NavItem key={name} href={href}>
+            <NavItem
+              key={name}
+              href={href}
+              onClick={(e) => handleNavClick(e, href)}
+            >
               <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               {name}
             </NavItem>
@@ -93,7 +116,11 @@ export function Navbar() {
       <Collapse open={open}>
         <ul className="flex flex-col gap-3 px-4 sm:px-6 pb-4 lg:hidden">
           {NAV_MENU.map(({ name, icon: Icon, href }) => (
-            <NavItem key={name} href={href}>
+            <NavItem
+              key={name}
+              href={href}
+              onClick={(e) => handleNavClick(e, href)}
+            >
               <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               {name}
             </NavItem>
