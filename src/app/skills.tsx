@@ -2,35 +2,37 @@
 
 import { Typography } from "@material-tailwind/react";
 
+import { getIconPrefix } from "../../utils/utils";
+
 const TECH_STACK = [
   // Frontend
-  { name: "HTML5", icon: "/icons/html5.svg" },
-  { name: "CSS3", icon: "/icons/css.svg" },
-  { name: "JavaScript", icon: "/icons/javascript.svg" },
-  { name: "React", icon: "/icons/react.svg" },
-  { name: "Bootstrap", icon: "/icons/bootstrap.svg" },
+  { name: "HTML5", icon: `${getIconPrefix()}html5.svg` },
+  { name: "CSS3", icon: `${getIconPrefix()}css.svg` },
+  { name: "JavaScript", icon: `${getIconPrefix()}javascript.svg` },
+  { name: "React", icon: `${getIconPrefix()}react.svg` },
+  { name: "Bootstrap", icon: `${getIconPrefix()}bootstrap.svg` },
 
   // Backend
-  { name: "Node.js", icon: "/icons/nodejs.svg" },
-  { name: "C#", icon: "/icons/csharp.svg" },
-  { name: "ASP.NET", icon: "/icons/aspnet.svg" },
+  { name: "Node.js", icon: `${getIconPrefix()}nodejs.svg` },
+  { name: "C#", icon: `${getIconPrefix()}csharp.svg` },
+  { name: "ASP.NET", icon: `${getIconPrefix()}aspnet.svg` },
 
   // Database
-  { name: "MySQL", icon: "/icons/mysql.svg" },
-  { name: "SQLite", icon: "/icons/sqlite.svg" },
+  { name: "MySQL", icon: `${getIconPrefix()}mysql.svg` },
+  { name: "SQLite", icon: `${getIconPrefix()}sqlite.svg` },
 
   // Game Development
-  { name: "Unity", icon: "/icons/unity.svg" },
-  { name: "Godot", icon: "/icons/godot.svg" },
+  { name: "Unity", icon: `${getIconPrefix()}unity.svg` },
+  { name: "Godot", icon: `${getIconPrefix()}godot.svg` },
 
   // Mobile Development
-  { name: "Xamarin", icon: "/icons/xamarin.svg" },
+  { name: "Xamarin", icon: `${getIconPrefix()}xamarin.svg` },
 
   // Data Science
-  { name: "Python", icon: "/icons/python.svg" },
-  { name: "Pandas", icon: "/icons/pandas.svg" },
-  { name: "NumPy", icon: "/icons/numpy.svg" },
-  { name: "Plotly", icon: "/icons/plotly.svg" },
+  { name: "Python", icon: `${getIconPrefix()}python.svg` },
+  { name: "Pandas", icon: `${getIconPrefix()}pandas.svg` },
+  { name: "NumPy", icon: `${getIconPrefix()}numpy.svg` },
+  { name: "Plotly", icon: `${getIconPrefix()}plotly.svg` },
 ];
 
 
