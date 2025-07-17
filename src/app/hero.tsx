@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import { Typography } from "@material-tailwind/react";
-import { getImagePrefix } from "../../utils/utils";
 import { motion } from "framer-motion";
 
 export default function Hero() {
@@ -11,48 +9,46 @@ export default function Hero() {
       id="about"
       className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100 px-4 sm:px-6 md:px-10 lg:px-20 min-h-screen flex items-center"
     >
-      <div className="container mx-auto grid grid-cols-1 items-center gap-8 sm:gap-12 lg:gap-16 lg:grid-cols-2">
-        {/* Text Section */}
-        <div className="order-2 lg:order-1 text-center lg:text-left space-y-3 sm:space-y-4 animate-fade-in-up">
-          <Typography
-            variant="small"
-            className="uppercase text-blue-400 font-semibold tracking-wider text-sm sm:text-base"
-          >
-            Hello, I&apos;m Cliff
-          </Typography>
+      <div className="container mx-auto text-center space-y-6">
+        {/* Artistic Headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <Typography
             variant="h1"
-            color="white"
-            className="text-3xl sm:text-4xl font-extrabold leading-tight lg:text-5xl"
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400"
           >
-            Aspiring Developer <br />
-            <span className="text-blue-500">Building for the Web</span>
+            Hello, I'm Cliff
           </Typography>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          <Typography
+            variant="h2"
+            className="text-lg sm:text-xl md:text-2xl text-gray-300"
+          >
+            Software Developer — crafting responsive, beautiful, and accessible experiences.
+          </Typography>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 80 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4 }}
+        >
           <Typography
             variant="lead"
-            className="text-gray-300 max-w-xl mx-auto lg:mx-0 text-sm sm:text-base md:text-lg"
+            className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400"
           >
-            I&apos;m <strong className="text-white">Cliff Marvic M. Coligado</strong>, a graduating Computer Science student passionate about clean design,
-            frontend development, and building responsive, accessible user interfaces.
+            I’m <span className="text-white font-medium">Cliff Marvic M. Coligado</span>, a graduating Computer Science student driven by clean code, design thinking, and intuitive user interfaces.
           </Typography>
-        </div>
-
-        {/* Image Section */}
-        <div className="order-1 lg:order-2 flex justify-center animate-fade-in-up delay-[200ms]">
-          <motion.div
-            layoutId="profile-image"
-            className="relative h-64 w-64 sm:h-80 sm:w-80 md:h-96 md:w-96 rounded-full ring-2 sm:ring-4 ring-blue-500 shadow-2xl overflow-hidden"
-          >
-            <Image
-              width={600}
-              height={600}
-              alt="Cliff Coligado portrait"
-              src={`${getImagePrefix()}image/profilepic.jpg`}
-              className="h-full w-full object-cover"
-              priority
-            />
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
