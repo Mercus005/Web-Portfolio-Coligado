@@ -18,7 +18,10 @@ const CERTIFICATIONS = [
 
 export function CertificationsSection() {
   return (
-<section className="py-12 px-8 lg:py-20 bg-gray-900 text-gray-100">
+<section
+  id="certifications"
+  className="py-12 px-8 lg:py-20 bg-gray-900 text-gray-100 min-h-screen flex items-center"
+>
   <div className="container mx-auto text-center">
     <Typography variant="h6" className="mb-2 uppercase text-gray-400">
       Certifications & Credentials

@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100 px-4 sm:px-6 md:px-10 lg:px-20 py-16 sm:py-20 md:py-24"
+      className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100 px-4 sm:px-6 md:px-10 lg:px-20 min-h-screen flex items-center"
     >
       <div className="container mx-auto grid grid-cols-1 items-center gap-8 sm:gap-12 lg:gap-16 lg:grid-cols-2">
         {/* Text Section */}

@@ -20,7 +20,7 @@ const NAV_MENU = [
   { name: "About", icon: UserCircleIcon, href: "#about" },
   { name: "Resume", icon: RectangleStackIcon, href: "#resume" },
   { name: "Internship", icon: BriefcaseIcon, href: "#internship" },
-  { name: "Clients", icon: UserCircleIcon, href: "#clients" },
+  { name: "Certifications", icon: UserCircleIcon, href: "#clients" },
   { name: "Skills", icon: CommandLineIcon, href: "#skills" },
   { name: "Projects", icon: RectangleStackIcon, href: "#projects" },
   { name: "Contact", icon: CommandLineIcon, href: "#contact" },

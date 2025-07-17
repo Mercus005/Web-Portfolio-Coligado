@@ -29,7 +29,10 @@ const RESUME_ITEMS = [
 
 export function Resume() {
   return (
-    <section id="resume" className="bg-gray-900 text-gray-100 px-6 py-16">
+    <section
+      id="resume"
+      className="bg-gray-900 text-gray-100 px-6 min-h-screen flex items-center"
+    >
       <div className="container mx-auto grid grid-cols-1 gap-12 lg:grid-cols-2 items-start">
         {/* Left Side - Resume Details */}
         <div className="space-y-6">

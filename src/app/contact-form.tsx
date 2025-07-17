@@ -12,54 +12,61 @@ import {
 
 export function ContactForm() {
   return (
-    <section className="px-8 py-10 bg-gray-50" id="contact">
-      <div className="container mx-auto mb-10 text-center">
-        <Typography variant="h1" color="blue-gray" className="mb-4">
+    <section
+      id="contact"
+      className="px-4 sm:px-6 md:px-8 py-16 bg-gray-50 min-h-screen flex flex-col items-center"
+    >
+      <div className="text-center mb-10 px-4">
+        <Typography variant="h1" color="blue-gray" className="mb-4 text-3xl sm:text-4xl">
           Contact Me
         </Typography>
         <Typography
           variant="lead"
-          className="mx-auto w-full lg:w-5/12 !text-gray-500"
+          className="mx-auto w-full max-w-lg text-gray-500"
         >
           My contact information.
         </Typography>
       </div>
-      <div className="container mx-auto max-w-3xl">
-        <div className="w-full rounded-lg h-full py-8 p-5 md:p-16 bg-gray-900">
-          <Typography variant="h4" color="white" className="mb-4">
+
+      <div className="w-full max-w-3xl">
+        <div className="w-full rounded-lg h-full py-10 px-6 sm:px-8 md:px-16 bg-gray-900">
+          <Typography variant="h4" color="white" className="mb-4 text-2xl sm:text-3xl">
             Contact Information
           </Typography>
+
           <Typography
             variant="lead"
-            className="text-base !text-gray-400 mb-8"
+            className="text-base text-gray-400 mb-8"
           >
             You can get in touch with me through the channels below.
           </Typography>
 
-          <div className="flex gap-5 mb-4">
-            <PhoneIcon className="h-6 w-6 text-white" />
-            <Typography variant="h6" color="white">
-              +63 919 005 8783
-            </Typography>
+          <div className="space-y-6 text-white">
+            <div className="flex items-start gap-4">
+              <PhoneIcon className="h-6 w-6 mt-1 text-white shrink-0" />
+              <Typography variant="h6" color="white" className="break-words">
+                +63 919 005 8783
+              </Typography>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <EnvelopeIcon className="h-6 w-6 mt-1 text-white shrink-0" />
+              <div className="text-white space-y-1 text-sm sm:text-base">
+                <div>cmrvc.coligado@gmail.com</div>
+                <div>2021cmmcoligado@live.mcl.edu.ph</div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <TicketIcon className="h-6 w-6 mt-1 text-white shrink-0" />
+              <div className="text-white space-y-1 text-sm sm:text-base break-words">
+                <div>www.linkedin.com/in/cmmcoligado</div>
+                <div>https://github.com/Mercus005</div>
+              </div>
+            </div>
           </div>
 
-          <div className="flex gap-5 mb-4">
-            <EnvelopeIcon className="h-6 w-6 text-white" />
-            <Typography variant="h6" color="white">
-              cmrvc.coligado@gmail.com
-              2021cmmcoligado@live.mcl.edu.ph
-            </Typography>
-          </div>
-
-          <div className="flex gap-5 mb-8">
-            <TicketIcon className="h-6 w-6 text-white" />
-            <Typography variant="h6" color="white">
-              www.linkedin.com/in/cmmcoligado
-              https://github.com/Mercus005
-            </Typography>
-          </div>
-
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap justify-start gap-5 mt-10">
             <IconButton variant="text" color="white">
               <i className="fa-brands fa-facebook text-lg" />
             </IconButton>

@@ -4,7 +4,10 @@ import { Typography, Button } from "@material-tailwind/react";
 
 export function Internship() {
   return (
-    <section className="bg-white py-12 sm:py-16 md:py-20 px-4 sm:px-6" id="internship">
+    <section
+      id="internship"
+      className="bg-white text-gray-900 px-4 sm:px-6 min-h-screen flex items-center"
+    >
       <div className="max-w-6xl mx-auto">
         {/* Header Section - Left Aligned */}
         <div className="mb-8 sm:mb-12">
@@ -38,7 +41,7 @@ export function Internship() {
               the frontend using HTML, CSS, and Bootstrap 5, while the backend utilized ASP.NET Core MVC 8.0 and MySQL for database management.
             </p>
             <p className="sm:pr-4">
-              I followed software development best practices including clean documentation, user testing, and deployment via IIS. The project gave
+              I followed software development practices including documentation, user testing, and deployment via IIS. The project gave
               me hands-on experience building enterprise tools and maintaining code quality from development to deployment.
             </p>
 

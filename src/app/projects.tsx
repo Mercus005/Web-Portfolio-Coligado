@@ -59,9 +59,9 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-10 px-4 sm:px-6 lg:px-8 bg-gray-900 text-gray-100"
+      className="bg-gray-900 text-gray-100 min-h-screen px-4 sm:px-6 lg:px-8 flex flex-col justify-center"
     >
-      <div className="max-w-7xl mx-auto mb-12 text-center">
+      <div className="max-w-7xl mx-auto w-full text-center mb-8 my-12">
         <Typography
           variant="h2"
           color="white"
@@ -74,7 +74,7 @@ export default function Projects() {
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-2 sm:px-0">
+      <div className="max-w-7xl w-full mx-auto grow grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-2 sm:px-0">
         {PROJECTS.map((project, idx) => (
           <div
             key={idx}
