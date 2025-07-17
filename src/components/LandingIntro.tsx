@@ -68,11 +68,10 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
           <div className="flex flex-wrap items-center gap-4 mb-8">
             <button
               onClick={handleEnter}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition shadow"
+              className="w-full sm:w-auto text-sm sm:text-base border border-gray-300 hover:border-white hover:bg-white hover:text-gray-900 text-white px-4 sm:px-6 py-2.5 rounded-md transition-colors duration-200 ease-in-out"
             >
-              Enter Site
+              Explore My Work
             </button>
-
             {socialLinks.map((link) => (
               <a
                 key={link.name}
