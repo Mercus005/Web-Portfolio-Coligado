@@ -1,17 +1,23 @@
 "use client";
 
 import { Typography, Button } from "@material-tailwind/react";
+import { getPdfPrefix } from "../../utils/utils";
 
 export function Internship() {
+  const pdfPath = `${getPdfPrefix()}Practicum Final Report_Coligado.pdf`;
+
   return (
     <section
       id="internship"
       className="bg-white text-gray-900 px-4 sm:px-6 min-h-screen flex items-center"
     >
       <div className="max-w-6xl mx-auto">
-        {/* Header Section - Left Aligned */}
+        {/* Header Section */}
         <div className="mb-8 sm:mb-12">
-          <Typography variant="h3" className="text-gray-900 font-bold text-2xl sm:text-3xl md:text-4xl">
+          <Typography
+            variant="h3"
+            className="text-gray-900 font-bold text-2xl sm:text-3xl md:text-4xl"
+          >
             Internship Experience
           </Typography>
           <Typography className="text-gray-600 text-sm sm:text-base mt-2">
@@ -19,9 +25,8 @@ export function Internship() {
           </Typography>
         </div>
 
-        {/* Main Grid */}
+        {/* Content Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
-          {/* Left Paragraph */}
           <div className="text-gray-800 leading-relaxed text-sm sm:text-base space-y-3 sm:space-y-4">
             <p className="sm:pr-4">
               I was assigned to the Information System Department (ISD), where I underwent orientation and was later endorsed to
@@ -34,7 +39,6 @@ export function Internship() {
             </p>
           </div>
 
-          {/* Right Paragraph */}
           <div className="text-gray-800 leading-relaxed text-sm sm:text-base space-y-3 sm:space-y-4">
             <p className="sm:pr-4">
               The web-based system featured account-based access, import/export for csv, audit logs, and CRUD functionality. I developed
@@ -50,7 +54,7 @@ export function Internship() {
                 variant="gradient"
                 color="gray"
                 className="w-full sm:w-auto text-sm sm:text-base bg-gray-900 hover:bg-gray-800 text-white font-medium px-4 sm:px-6 py-2.5 rounded-md shadow-md transition"
-                onClick={() => window.open("/Practicum Final Report_Coligado.pdf", "_blank")}
+                onClick={() => window.open(pdfPath, "_blank")}
               >
                 View Internship Report
               </Button>

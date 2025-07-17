@@ -10,4 +10,10 @@ const getIconPrefix = () => {
     : "/icons/";
 };
 
-export { getImagePrefix, getIconPrefix };
+const getPdfPrefix = () => {
+  return process.env.NODE_ENV === "production"
+    ? "/Web-Portfolio-Coligado/"
+    : "";
+};
+
+export { getImagePrefix, getIconPrefix, getPdfPrefix };

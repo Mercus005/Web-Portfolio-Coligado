@@ -1,5 +1,3 @@
-"use client";
-
 import { Typography, Button } from "@material-tailwind/react";
 import {
   ChartBarIcon,
@@ -7,6 +5,7 @@ import {
   CursorArrowRaysIcon,
   ArrowRightIcon,
 } from "@heroicons/react/24/solid";
+import { getPdfPrefix } from "../../utils/utils";
 
 const RESUME_ITEMS = [
   {
@@ -28,13 +27,15 @@ const RESUME_ITEMS = [
 ];
 
 export function Resume() {
+  const resumePdfPath = `${getPdfPrefix()}Coligado_Resume.pdf`;
+
   return (
     <section
       id="resume"
       className="bg-gray-900 text-gray-100 px-6 min-h-screen flex items-center"
     >
       <div className="container mx-auto grid grid-cols-1 gap-12 lg:grid-cols-2 items-start">
-        {/* Left Side - Resume Details */}
+        {/* Resume details */}
         <div className="space-y-6">
           {RESUME_ITEMS.map((item, idx) => (
             <div key={idx} className="flex items-start gap-4">
@@ -53,7 +54,7 @@ export function Resume() {
           ))}
         </div>
 
-        {/* Right Side - Summary and Resume Button */}
+        {/* Resume summary and button */}
         <div>
           <Typography variant="h3" className="mb-4 font-bold text-white">
             My Resume
@@ -64,7 +65,7 @@ export function Resume() {
             optimizing for responsiveness, and continuously learning modern front-end tools.
           </Typography>
           <a
-            href="/Coligado_Resume.pdf"
+            href={resumePdfPath}
             target="_blank"
             rel="noopener noreferrer"
           >
