@@ -54,3 +54,62 @@ html, body {
   mask-image: radial-gradient(ellipse 80% 80% at center, black 90%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 80% 80% at center, black 60%, transparent 100%);
 }
+
+
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none !important;
+}
+
+
+/* Pagination bullets */
+.swiper-pagination-bullet.custom-bullet {
+  background-color: #ffffff;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.swiper-pagination-bullet-active.custom-bullet-active {
+  opacity: 1;
+}
+
+/* Navigation arrow container */
+.custom-nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Base arrow style */
+.nav-arrow-img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Left arrow rotation */
+.arrow-left {
+  transform: rotate(-90deg);
+}
+
+/* Right arrow rotation */
+.arrow-right {
+  transform: rotate(90deg);
+}
+
+/* Hover effect */
+.custom-nav-arrow:hover .arrow-left {
+  transform: rotate(-90deg) scale(1.2);
+  filter: brightness(0) invert(1) ;
+}
+
+.custom-nav-arrow:hover .arrow-right {
+  transform: rotate(90deg) scale(1.2);
+  filter: brightness(0) invert(1) ;
+}

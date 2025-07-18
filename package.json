@@ -20,7 +20,8 @@
     "next": "^15.3.4",
     "react": "18",
     "react-dom": "18",
-    "react-responsive-carousel": "^3.2.23"
+    "react-responsive-carousel": "^3.2.23",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@types/node": "20",
