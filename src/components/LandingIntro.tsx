@@ -48,24 +48,25 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: isExiting ? 0 : 1 }}
       transition={{ duration: 1 }}
-      className="absolute inset-0 z-50 w-full min-h-screen bg-gray-900 text-white"
+      className="absolute inset-0 z-50 w-full h-screen bg-gray-900 text-white"
     >
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-between px-8 lg:px-24 py-16 min-h-screen gap-12">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-4 sm:py-6 md:py-8 h-full flex flex-col-reverse lg:flex-row items-center justify-between gap-4 lg:gap-8">
+        
         {/* Left Text Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="w-full lg:w-1/2"
+          className="w-full lg:w-1/2 text-center lg:text-left"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
             Cliff Coligado is <span className="text-blue-400">Right Here!</span>
           </h1>
-          <p className="text-gray-300 text-lg mb-8">
+          <p className="text-gray-300 text-base sm:text-lg mb-6">
             Come see what I have to offer
           </p>
 
-          <div className="flex flex-wrap items-center gap-4 mb-8">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 justify-center lg:justify-start">
             <button
               onClick={handleEnter}
               className="w-full sm:w-auto text-sm sm:text-base border border-gray-300 hover:border-white hover:bg-white hover:text-gray-900 text-white px-4 sm:px-6 py-2.5 rounded-md transition-colors duration-200 ease-in-out"
@@ -78,7 +79,7 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-3 border border-gray-600 rounded-md text-sm text-white hover:border-white transition"
+                className="flex items-center gap-2 px-5 py-2 border border-gray-600 rounded-md text-sm text-white hover:border-white transition"
               >
                 {link.icon}
                 <span>{link.name}</span>
@@ -92,14 +93,17 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="w-full lg:w-1/2 flex justify-center"
+          className="w-full lg:w-1/2 flex justify-center items-end h-full"
         >
-          <img
-            src={`${getImagePrefix()}image/profilepic.png`}
-            alt="Portrait of Cliff Coligado"
-            className="w-full max-w-md lg:max-w-lg rounded-xl"
-          />
+          <div className="w-[65%] sm:w-[55%] md:w-[45%] lg:w-[505px] aspect-[2/3] sm:aspect-[3/4] flex items-end">
+            <img
+              src={`${getImagePrefix()}image/profilepic.png`}
+              alt="Portrait of Cliff Coligado"
+              className="w-full h-full object-cover rounded-xl drop-shadow-xl"
+            />
+          </div>
         </motion.div>
+
       </div>
     </motion.div>
   );
