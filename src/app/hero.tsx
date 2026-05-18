@@ -33,7 +33,7 @@ export default function Hero() {
             variant="h2"
             className="text-lg sm:text-xl md:text-2xl text-gray-300"
           >
-            Software Developer — crafting responsive, beautiful, and accessible experiences.
+            Crafting responsive, beautiful, and accessible experiences.
           </Typography>
         </motion.div>
 
@@ -46,7 +46,7 @@ export default function Hero() {
             variant="lead"
             className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400"
           >
-            I’m <span className="text-white font-medium">Cliff Marvic M. Coligado</span>, a graduating Computer Science student driven by clean code, design thinking, and intuitive user interfaces.
+            I’m <span className="text-white font-medium">Cliff Marvic M. Coligado</span>, a Computer Science graduate driven by clean code, design thinking, and intuitive user interfaces.
           </Typography>
         </motion.div>
       </div>

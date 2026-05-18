@@ -11,7 +11,7 @@ const RESUME_ITEMS = [
   {
     icon: ChartBarIcon,
     title: "Education",
-    description: "Bachelor of Science in Computer Science",
+    description: "Bachelor of Science in Computer Science - Magna Cum Laude",
   },
   {
     icon: PuzzlePieceIcon,
@@ -74,7 +74,7 @@ export function Resume() {
               color="gray"
               className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600"
             >
-              View Resume
+              View
               <ArrowRightIcon className="h-4 w-4" />
             </Button>
           </a>
