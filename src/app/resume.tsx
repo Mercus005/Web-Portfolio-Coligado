@@ -27,7 +27,7 @@ const RESUME_ITEMS = [
 ];
 
 export function Resume() {
-  const resumePdfPath = `${getPdfPrefix()}Coligado_Resume.pdf`;
+  const resumePdfPath = `${getPdfPrefix()}COLIGADO_CV.pdf`;
 
   return (
     <section
@@ -57,7 +57,7 @@ export function Resume() {
         {/* Resume summary and button */}
         <div>
           <Typography variant="h3" className="mb-4 font-bold text-white">
-            My Resume
+            My CV
           </Typography>
           <Typography className="mb-6 text-gray-300 leading-relaxed text-sm">
             Passionate and determined web developer with hands-on experience
