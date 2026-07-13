@@ -1,10 +1,10 @@
 {
-  "name": "nextjs-tailwind-portfolio-page",
+  "name": "cliff-coligado-portfolio",
   "version": "1.0.0",
   "private": true,
-  "author": "Creative Tim",
+  "author": "Cliff Marvic Coligado",
   "license": "See license in https://www.creative-tim.com/license",
-  "homepage": "https://github.com/themewagon/Next.js-Tailwind-CSS-Portfolio-Template",
+  "homepage": "https://github.com/Mercus005/Web-Portfolio-Coligado",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -14,9 +14,9 @@
     "jsx": "preserve",
     "incremental": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",                            // ✅ ADD THIS
+    "baseUrl": ".",                            
     "paths": {
-      "@/*": ["src/*"]                          // ✅ NOW THIS WILL WORK
+      "@/*": ["src/*"]                          
     },
     "plugins": [{ "name": "next" }]
   },
