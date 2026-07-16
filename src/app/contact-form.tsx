@@ -1,86 +1,106 @@
 "use client";
 
-import {
-  Typography,
-  IconButton,
-} from "@material-tailwind/react";
-import {
-  EnvelopeIcon,
-  PhoneIcon,
-  TicketIcon,
-} from "@heroicons/react/24/solid";
+import { Typography } from "@material-tailwind/react";
+import { EnvelopeIcon, PhoneIcon, MapPinIcon } from "@heroicons/react/24/solid";
+import { motion } from "framer-motion";
+
+const CONTACT_TILES = [
+  {
+    label: "Phone",
+    value: "+63 919 005 8783",
+    href: "tel:+639190058783",
+    icon: PhoneIcon,
+  },
+  {
+    label: "Email",
+    value: "cmrvc.coligado@gmail.com",
+    href: "mailto:cmrvc.coligado@gmail.com",
+    icon: EnvelopeIcon,
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/cmmcoligado",
+    href: "https://www.linkedin.com/in/cmmcoligado",
+    icon: (props: React.SVGProps<SVGSVGElement>) => (
+      <svg {...props} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.8v2.1h.1c.5-1 1.7-2.1 3.5-2.1 3.7 0 4.4 2.4 4.4 5.5V24h-4v-8.5c0-2-.1-4.5-2.7-4.5-2.7 0-3.1 2.1-3.1 4.3V24h-4V8.5z" />
+      </svg>
+    ),
+  },
+  {
+    label: "GitHub",
+    value: "github.com/Mercus005",
+    href: "https://github.com/Mercus005",
+    icon: (props: React.SVGProps<SVGSVGElement>) => (
+      <svg {...props} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.1 3.29 9.41 7.84 10.95.57.11.78-.25.78-.55v-2.1c-3.18.69-3.85-1.53-3.85-1.53-.52-1.3-1.27-1.65-1.27-1.65-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.26.72-1.55-2.54-.29-5.2-1.27-5.2-5.66 0-1.25.45-2.27 1.19-3.07-.12-.3-.52-1.51.12-3.16 0 0 .97-.31 3.18 1.18a11.03 11.03 0 0 1 2.9-.39c.98.01 1.97.13 2.9.39 2.2-1.49 3.18-1.18 3.18-1.18.65 1.65.25 2.86.12 3.16.75.8 1.19 1.82 1.19 3.07 0 4.4-2.66 5.36-5.21 5.65.41.35.77 1.04.77 2.1v3.12c0 .31.2.67.79.55A10.51 10.51 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z" />
+      </svg>
+    ),
+  },
+];
 
 export function ContactForm() {
   return (
     <section
       id="contact"
-      className="px-4 sm:px-6 md:px-8 py-16 bg-gray-50 min-h-screen flex flex-col items-center"
+      className="px-4 sm:px-6 md:px-10 lg:px-20 py-16 bg-ink-900 text-paper min-h-screen flex items-center"
     >
-      <div className="text-center mb-10 px-4">
-        <Typography variant="h1" color="blue-gray" className="mb-4 text-3xl sm:text-4xl">
-          Contact Me
-        </Typography>
-        <Typography
-          variant="lead"
-          className="mx-auto w-full max-w-lg text-gray-500"
+      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-center">
+        {/* Left: heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="lg:col-span-2 text-center lg:text-left"
         >
-          My contact information.
-        </Typography>
-      </div>
-
-      <div className="w-full max-w-3xl">
-        <div className="w-full rounded-lg h-full py-10 px-6 sm:px-8 md:px-16 bg-gray-900">
-          <Typography variant="h4" color="white" className="mb-4 text-2xl sm:text-3xl">
-            Contact Information
-          </Typography>
-
+          <div className="font-mono text-sm text-aqua mb-3">{"// contact"}</div>
           <Typography
-            variant="lead"
-            className="text-base text-gray-400 mb-8"
+            variant="h1"
+            className="font-display mb-4 text-3xl sm:text-4xl font-semibold text-paper leading-tight"
           >
-            You can get in touch with me through the channels below.
+            Let&rsquo;s Talk
           </Typography>
-
-          <div className="space-y-6 text-white">
-            <div className="flex items-start gap-4">
-              <PhoneIcon className="h-6 w-6 mt-1 text-white shrink-0" />
-              <Typography variant="h6" color="white" className="break-words">
-                +63 919 005 8783
-              </Typography>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <EnvelopeIcon className="h-6 w-6 mt-1 text-white shrink-0" />
-              <div className="text-white space-y-1 text-sm sm:text-base">
-                <div>cmrvc.coligado@gmail.com</div>
-                <div>2021cmmcoligado@live.mcl.edu.ph</div>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <TicketIcon className="h-6 w-6 mt-1 text-white shrink-0" />
-              <div className="text-white space-y-1 text-sm sm:text-base break-words">
-                <div>www.linkedin.com/in/cmmcoligado</div>
-                <div>https://github.com/Mercus005</div>
-              </div>
-            </div>
+          <Typography className="text-paper-muted text-sm sm:text-base mb-6 max-w-sm mx-auto lg:mx-0">
+            Have an opportunity, a project, or just want to say hi? The
+            easiest ways to reach me are on the right.
+          </Typography>
+          <div className="inline-flex items-center gap-2 justify-center lg:justify-start text-sm text-paper-faint">
+            <MapPinIcon className="h-4 w-4 text-signal" />
+            Cabuyao City, Laguna, Philippines
           </div>
+        </motion.div>
 
-          <div className="flex flex-wrap justify-start gap-5 mt-10">
-            <IconButton variant="text" color="white">
-              <i className="fa-brands fa-facebook text-lg" />
-            </IconButton>
-            <IconButton variant="text" color="white">
-              <i className="fa-brands fa-instagram text-lg" />
-            </IconButton>
-            <IconButton variant="text" color="white">
-              <i className="fa-brands fa-github text-lg" />
-            </IconButton>
-            <IconButton variant="text" color="white">
-              <i className="fa-brands fa-linkedin text-lg" />
-            </IconButton>
-          </div>
-        </div>
+        {/* Right: contact tiles */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4"
+        >
+          {CONTACT_TILES.map((tile) => (
+            <a
+              key={tile.label}
+              href={tile.href}
+              target={tile.href.startsWith("http") ? "_blank" : undefined}
+              rel={tile.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="group flex items-start gap-4 rounded-xl border border-ink-700 bg-ink-800 p-5 hover:border-signal hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ink-700 text-signal group-hover:bg-signal group-hover:text-white transition-colors">
+                <tile.icon className="h-5 w-5" />
+              </div>
+              <div className="min-w-0">
+                <p className="font-mono text-xs uppercase tracking-wide text-paper-faint mb-1">
+                  {tile.label}
+                </p>
+                <p className="text-sm sm:text-base text-paper font-medium break-words group-hover:text-aqua transition-colors">
+                  {tile.value}
+                </p>
+              </div>
+            </a>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

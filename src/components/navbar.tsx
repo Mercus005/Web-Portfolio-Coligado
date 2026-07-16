@@ -4,12 +4,12 @@ import React from "react";
 import {
   Navbar as MTNavbar,
   IconButton,
-  Typography,
   Collapse,
 } from "@material-tailwind/react";
 import {
   RectangleStackIcon,
   UserCircleIcon,
+  IdentificationIcon,
   CommandLineIcon,
   XMarkIcon,
   Bars3Icon,
@@ -18,14 +18,14 @@ import {
 
 const NAV_MENU = [
   { name: "About", icon: UserCircleIcon, href: "#about" },
-  { name: "Resume", icon: RectangleStackIcon, href: "#resume" },
+  { name: "Bio", icon: IdentificationIcon, href: "#about-me" },
+  { name: "CV", icon: RectangleStackIcon, href: "#resume" },
   { name: "Internship", icon: BriefcaseIcon, href: "#internship" },
   { name: "Certifications", icon: UserCircleIcon, href: "#clients" },
   { name: "Skills", icon: CommandLineIcon, href: "#skills" },
   { name: "Projects", icon: RectangleStackIcon, href: "#projects" },
   { name: "Contact", icon: CommandLineIcon, href: "#contact" },
 ];
-
 
 interface NavItemProps {
   children: React.ReactNode;
@@ -39,7 +39,7 @@ function NavItem({ children, href, onClick }: NavItemProps) {
       <a
         href={href || "#"}
         onClick={onClick}
-        className="flex items-center gap-1.5 sm:gap-2 font-medium text-gray-200 hover:text-blue-400 transition-colors duration-200 text-sm sm:text-base"
+        className="flex items-center gap-1.5 sm:gap-2 font-medium text-paper-muted hover:text-aqua transition-colors duration-200 text-sm sm:text-base"
       >
         {children}
       </a>
@@ -76,12 +76,16 @@ export function Navbar({ onNavClick }: NavbarProps) {
     <MTNavbar
       shadow={false}
       fullWidth
-      className="sticky top-0 z-50 border-0 bg-gray-900 text-white backdrop-blur-md px-4 sm:px-6"
+      className="sticky top-0 z-50 border-b border-ink-700 bg-ink-950/90 text-paper backdrop-blur-md px-4 sm:px-6"
     >
       <div className="container mx-auto flex items-center justify-between py-2 sm:py-3">
-        <Typography className="text-base sm:text-lg font-bold text-white truncate max-w-[200px] sm:max-w-none">
+        <a
+          href="#about"
+          onClick={(e) => handleNavClick(e, "#about")}
+          className="font-display text-base sm:text-lg font-semibold text-paper truncate max-w-[200px] sm:max-w-none"
+        >
           Cliff Marvic M. Coligado
-        </Typography>
+        </a>
 
         {/* Desktop Menu */}
         <ul className="hidden items-center gap-4 sm:gap-6 lg:gap-8 lg:flex">
@@ -100,9 +104,8 @@ export function Navbar({ onNavClick }: NavbarProps) {
         {/* Mobile Toggle Button */}
         <IconButton
           variant="text"
-          color="white"
           onClick={handleOpen}
-          className="ml-auto lg:hidden h-8 w-8 sm:h-10 sm:w-10"
+          className="ml-auto lg:hidden h-8 w-8 sm:h-10 sm:w-10 text-paper"
         >
           {open ? (
             <XMarkIcon strokeWidth={2} className="h-5 w-5 sm:h-6 sm:w-6" />

@@ -4,15 +4,44 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { getImagePrefix } from "../../utils/utils";
 
+const COMMAND = "itsme";
+
 export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
   const [isExiting, setIsExiting] = useState(false);
+  const [typed, setTyped] = useState("");
+  const [showResult, setShowResult] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   const handleEnter = () => {
     if (!isExiting) {
       setIsExiting(true);
-      setTimeout(onFinish, 1000);
+      setTimeout(onFinish, 800);
     }
   };
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    setReduceMotion(prefersReduced);
+
+    if (prefersReduced) {
+      setTyped(COMMAND);
+      setShowResult(true);
+      return;
+    }
+
+    let i = 0;
+    const typeTimer = setInterval(() => {
+      i += 1;
+      setTyped(COMMAND.slice(0, i));
+      if (i >= COMMAND.length) {
+        clearInterval(typeTimer);
+        setTimeout(() => setShowResult(true), 250);
+      }
+    }, 90);
+    return () => clearInterval(typeTimer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +49,7 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const socialLinks = [
@@ -47,31 +77,72 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: isExiting ? 0 : 1 }}
-      transition={{ duration: 1 }}
-      className="absolute inset-0 z-50 w-full h-screen bg-gray-900 text-white"
+      transition={{ duration: 0.8 }}
+      className="absolute inset-0 z-50 w-full h-screen bg-ink-950 text-paper overflow-hidden"
     >
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-4 sm:py-6 md:py-8 h-full flex flex-col-reverse lg:flex-row items-center justify-between gap-4 lg:gap-8">
-        
+      {/* Ambient glow, kept subtle and behind everything */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-32 right-0 w-[560px] h-[560px] rounded-full bg-signal/20 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-aqua/10 blur-[100px]"
+      />
+
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-4 sm:py-6 md:py-8 h-full flex flex-col-reverse lg:flex-row items-center justify-between gap-4 lg:gap-8">
         {/* Left Text Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.2 }}
           className="w-full lg:w-1/2 text-center lg:text-left"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            Cliff Coligado is <span className="text-blue-400">Right Here!</span>
-          </h1>
-          <p className="text-gray-300 text-base sm:text-lg mb-6">
-            Come see what I have to offer
-          </p>
+          {/* Signature: terminal-style identity reveal */}
+          <div className="font-mono text-sm sm:text-base text-aqua mb-4 h-6 flex items-center justify-center lg:justify-start">
+            <span className="text-paper-faint mr-2">$</span>
+            <span>{typed}</span>
+            <span className="inline-block w-[2px] h-4 bg-aqua ml-0.5 animate-pulse motion-reduce:animate-none" />
+          </div>
 
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 justify-center lg:justify-start">
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={showResult ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-3 leading-tight"
+          >
+            Cliff Marvic Coligado
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={showResult ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="font-display text-lg sm:text-xl text-transparent bg-clip-text bg-gradient-to-r from-signal-light to-aqua mb-4"
+          >
+            Software Developer — Web · Mobile · Games · Etc
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={showResult ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-paper-muted text-base sm:text-lg mb-6 max-w-md mx-auto lg:mx-0"
+          >
+            A Computer Science graduate aiming to contribute to projects that make a difference. Come see what I have to offer.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={showResult ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-wrap items-center gap-3 sm:gap-4 mb-4 justify-center lg:justify-start"
+          >
             <button
               onClick={handleEnter}
-              className="w-full sm:w-auto text-sm sm:text-base border border-gray-300 hover:border-white hover:bg-white hover:text-gray-900 text-white px-4 sm:px-6 py-2.5 rounded-md transition-colors duration-200 ease-in-out"
+              className="w-full sm:w-auto text-sm sm:text-base bg-signal hover:bg-signal-dark text-white font-medium px-6 py-2.5 rounded-md transition-colors duration-200 ease-in-out shadow-lg shadow-signal/20"
             >
-              Explore My Work
+              View my work
             </button>
             {socialLinks.map((link) => (
               <a
@@ -79,13 +150,13 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2 border border-gray-600 rounded-md text-sm text-white hover:border-white transition"
+                className="flex items-center gap-2 px-5 py-2 border border-ink-700 rounded-md text-sm text-paper hover:border-aqua hover:text-aqua transition-colors"
               >
                 {link.icon}
                 <span>{link.name}</span>
               </a>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Right Image */}
@@ -93,18 +164,60 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="w-full lg:w-1/2 flex justify-center items-end h-full"
+          className="w-full lg:w-1/2 flex justify-center lg:justify-end"
         >
-          <div className="w-[65%] sm:w-[55%] md:w-[45%] lg:w-[505px] aspect-[2/3] sm:aspect-[3/4] flex items-end">
-            <img
-              src={`${getImagePrefix()}image/profilepic.png`}
-              alt="Portrait of Cliff Coligado"
-              className="w-full h-full object-cover rounded-xl drop-shadow-xl"
+          <div className="relative w-[62%] sm:w-[42%] md:w-[36%] lg:w-[380px] max-w-[380px] aspect-[3/4]">
+            {/* Soft gradient glow behind the frame */}
+            <div
+              aria-hidden
+              className="absolute -inset-3 rounded-2xl bg-gradient-to-br from-signal/30 via-aqua/20 to-transparent blur-2xl"
+            />
+            {/* Gradient ring frame */}
+            <div className="relative w-full h-full rounded-xl p-[2px] bg-gradient-to-br from-signal via-aqua to-signal/40">
+              <div className="w-full h-full rounded-[10px] overflow-hidden bg-ink-900">
+                <img
+                  src={`${getImagePrefix()}image/profilepic.png`}
+                  alt="Portrait of Cliff Coligado"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            {/* Corner bracket accents — a quiet nod to code syntax */}
+            <div
+              aria-hidden
+              className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-aqua rounded-tl-lg"
+            />
+            <div
+              aria-hidden
+              className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-signal rounded-br-lg"
             />
           </div>
         </motion.div>
-
       </div>
+
+      {/* Scroll cue */}
+      <motion.button
+        onClick={handleEnter}
+        aria-label="Scroll to explore"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showResult ? 1 : 0 }}
+        transition={{ delay: 0.4 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-paper-faint hover:text-aqua transition-colors"
+      >
+        <span className="font-mono text-xs">scroll</span>
+        <motion.svg
+          animate={reduceMotion ? {} : { y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: reduceMotion ? 0 : Infinity }}
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path d="M12 5v14M5 12l7 7 7-7" />
+        </motion.svg>
+      </motion.button>
     </motion.div>
   );
 }

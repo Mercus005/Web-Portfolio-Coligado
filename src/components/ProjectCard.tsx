@@ -1,102 +1,102 @@
 "use client";
 
-import { Typography } from "@material-tailwind/react";
-
 interface ProjectCardProps {
   title: string;
   desc: string;
   images: string[];
   stack: string[];
+  index?: number;
 }
 
-export default function ProjectCard({ title, desc, images, stack }: ProjectCardProps) {
-  const [category, titleText] = title.includes(" - ") ? title.split(" - ") : ["", title];
+const VISIBLE_TAGS = 3;
+
+// Full literal class strings per category (Tailwind's compiler scans source
+// text statically — it can't see classes assembled from interpolated
+// fragments like `text-${color}`, so each theme is written out in full).
+const CATEGORY_THEME: Record<
+  string,
+  { eyebrow: string; bar: string; border: string; tint: string }
+> = {
+  "Web Development": {
+    eyebrow: "text-aqua",
+    bar: "from-signal via-aqua to-signal",
+    border: "hover:border-signal/70",
+    tint: "to-signal/[0.08]",
+  },
+  "Mobile Game Development": {
+    eyebrow: "text-ember",
+    bar: "from-ember via-signal to-ember",
+    border: "hover:border-ember/70",
+    tint: "to-ember/[0.10]",
+  },
+};
+const DEFAULT_THEME = CATEGORY_THEME["Web Development"];
+
+export default function ProjectCard({
+  title,
+  desc,
+  images,
+  stack,
+  index = 0,
+}: ProjectCardProps) {
+  const [category, titleText] = title.includes(" - ")
+    ? title.split(" - ")
+    : ["", title];
+  const theme = CATEGORY_THEME[category] ?? DEFAULT_THEME;
+  const visibleStack = stack.slice(0, VISIBLE_TAGS);
+  const remaining = stack.length - visibleStack.length;
 
   return (
-    <div className="group [perspective:1000px] w-full h-64 sm:h-72 md:h-80">
-      <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+    <div
+      className={`group relative h-[340px] sm:h-[390px] md:h-[420px] w-full overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 transition-colors duration-300 ${theme.border}`}
+    >
+      <img
+        src={images[0]}
+        alt={titleText}
+        className="absolute inset-0 h-full w-full object-cover object-top"
+      />
+      <div
+        className={`absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/60 ${theme.tint}`}
+      />
+      <div
+        className={`absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r ${theme.bar} transition-transform duration-500 ease-out group-hover:scale-x-100`}
+      />
 
-        {/* FRONT SIDE */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900 text-gray-100 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg [backface-visibility:hidden]">
-          <img
-            src={images[0]}
-            alt={titleText}
-            className="h-32 sm:h-40 md:h-48 w-full object-cover"
-          />
-          <div className="p-3 sm:p-4">
-            {category && (
-              <Typography
-                variant="small"
-                className="uppercase text-blue-400 font-semibold tracking-wide text-xs sm:text-sm mb-1"
-              >
-                {category}
-              </Typography>
-            )}
-            <Typography
-              variant="h5"
-              className="text-white font-bold text-base sm:text-lg leading-snug tracking-tight"
+      <span className="absolute -top-3 right-2 font-display text-[92px] sm:text-[108px] md:text-[120px] font-bold text-paper/[0.07] select-none leading-none">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      {category && (
+        <span
+          className={`absolute top-4 left-4 font-mono text-[10px] sm:text-xs uppercase tracking-wide ${theme.eyebrow}`}
+        >
+          <span className="group-hover:hidden">{category}</span>
+          <span className="hidden group-hover:inline">View Project →</span>
+        </span>
+      )}
+      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6">
+        <h3 className="font-display text-xl sm:text-2xl font-semibold text-paper mb-2 leading-snug drop-shadow-sm">
+          {titleText}
+        </h3>
+        <p className="text-xs sm:text-sm text-paper-muted/90 leading-relaxed line-clamp-2 mb-4">
+          {desc}
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {visibleStack.map((tech, idx) => (
+            <span
+              key={idx}
+              className="rounded-full bg-ink-950/60 border border-ink-700 text-paper-muted px-2.5 py-1 text-[10px] sm:text-xs font-mono backdrop-blur-sm"
             >
-              {titleText}
-            </Typography>
-          </div>
-        </div>
-
-        {/* BACK SIDE (Updated) */}
-        <div className="absolute inset-0 bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-4 text-gray-100 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col">
-          
-          {/* Description */}
-          <div className="mb-2">
-            <Typography
-              variant="small"
-              className="uppercase text-gray-400 font-semibold tracking-wide text-xs sm:text-sm mb-1"
-            >
-              Description
-            </Typography>
-            <Typography className="text-xs sm:text-sm text-gray-200 leading-snug line-clamp-3">
-              {desc}
-            </Typography>
-          </div>
-
-          {/* Tech Stack */}
-          <div className="mb-3">
-            <Typography
-              variant="small"
-              className="uppercase text-gray-400 font-semibold tracking-wide text-xs sm:text-sm mb-1"
-            >
-              Tech Stack
-            </Typography>
-            <div className="flex flex-wrap gap-1 max-h-[3rem] overflow-y-auto">
-              {stack.map((tech, idx) => (
-                <span
-                  key={idx}
-                  className="bg-gray-700/80 text-gray-100 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium truncate"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Click Indicator */}
-          {images.length > 1 && (
-            <div className="mt-auto flex justify-center">
-              <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-400 text-blue-300 text-[11px] sm:text-xs font-medium shadow shadow-blue-400/10 hover:bg-blue-500/20 hover:text-white transition-all">
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-                <span>Click to view</span>
-              </div>
-            </div>
+              {tech}
+            </span>
+          ))}
+          {remaining > 0 && (
+            <span className="rounded-full bg-ink-950/60 border border-ink-700 text-paper-faint px-2.5 py-1 text-[10px] sm:text-xs font-mono backdrop-blur-sm">
+              +{remaining}
+            </span>
           )}
-
         </div>
       </div>
     </div>
   );
-}
+}   
