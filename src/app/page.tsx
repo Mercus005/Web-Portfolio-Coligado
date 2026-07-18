@@ -10,6 +10,7 @@ import Projects from "./projects";
 import Resume from "./resume";
 import ContactForm from "./contact-form";
 import Internship from "./internship";
+import BackgroundSpecks from "../components/BackgroundSpecks";
 import { useRef, useEffect, useState, useCallback } from "react";
 
 const SECTIONS = [
@@ -81,9 +82,10 @@ export default function Portfolio() {
             ref={(el) => {
               sectionRefs.current[index] = el;
             }}
-            className="snap-start scroll-mt-16 min-h-screen"
+            className="relative snap-start scroll-mt-16 min-h-screen"
           >
             <Component />
+            <BackgroundSpecks />
           </div>
         ))}
 
