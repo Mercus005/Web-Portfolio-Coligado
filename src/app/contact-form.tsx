@@ -3,6 +3,7 @@
 import { Typography } from "@material-tailwind/react";
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
+import ContactRevealCard from "../components/ContactRevealCard";
 
 const CONTACT_TILES = [
   {
@@ -62,8 +63,8 @@ export function ContactForm() {
             Let&rsquo;s Talk
           </Typography>
           <Typography className="text-paper-muted text-sm sm:text-base mb-6 max-w-sm mx-auto lg:mx-0">
-            Have an opportunity, a project, or just want to say hi? The
-            easiest ways to reach me are on the right.
+            Have an opportunity, a project, or just want to say hi? Hover or
+            tap a card to reveal the details.
           </Typography>
           <div className="inline-flex items-center gap-2 justify-center lg:justify-start text-sm text-paper-faint">
             <MapPinIcon className="h-4 w-4 text-signal" />
@@ -80,25 +81,7 @@ export function ContactForm() {
           className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           {CONTACT_TILES.map((tile) => (
-            <a
-              key={tile.label}
-              href={tile.href}
-              target={tile.href.startsWith("http") ? "_blank" : undefined}
-              rel={tile.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="group flex items-start gap-4 rounded-xl border border-ink-700 bg-ink-800 p-5 hover:border-signal hover:-translate-y-0.5 transition-all duration-200"
-            >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ink-700 text-signal group-hover:bg-signal group-hover:text-white transition-colors">
-                <tile.icon className="h-5 w-5" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-mono text-xs uppercase tracking-wide text-paper-faint mb-1">
-                  {tile.label}
-                </p>
-                <p className="text-sm sm:text-base text-paper font-medium break-words group-hover:text-aqua transition-colors">
-                  {tile.value}
-                </p>
-              </div>
-            </a>
+            <ContactRevealCard key={tile.label} {...tile} />
           ))}
         </motion.div>
       </div>
