@@ -127,10 +127,18 @@
   }
   
 
-  /* Background specks: drift diagonally from upper-right toward lower-left
-    while spinning. Pure transform animation (GPU-composited), driven by
-    per-particle CSS custom properties set inline — this is what lets each
-    one fall a different distance/rotation/speed from one shared keyframe. */
+  .flip-perspective {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+.flip-inner {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
   @keyframes speck-fall {
     from {
       transform: translate(0, -12vh) rotate(0deg);
@@ -140,3 +148,4 @@
     }
   }
   
+
