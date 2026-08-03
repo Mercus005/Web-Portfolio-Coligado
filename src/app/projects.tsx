@@ -80,10 +80,6 @@ export default function Projects() {
     setOpenModal(true);
   }, []);
 
-  // Click-and-drag scrolling for mouse users (trackpads and touch already
-  // scroll this natively). A small movement threshold distinguishes an
-  // actual drag from a click that happens to twitch a pixel or two, so
-  // clicking a card still opens it normally.
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
@@ -112,11 +108,7 @@ export default function Projects() {
     window.addEventListener("mouseup", handleMouseUp);
   }, []);
 
-  // Lets a plain mouse wheel control this row when hovering over it,
-  // instead of doing nothing (or bouncing focus to the vertically-snapping
-  // page). Only takes over vertical wheel ticks — a trackpad's horizontal
-  // swipe is left alone — and steps aside at either end of the row so wheel
-  // users aren't trapped and can keep scrolling the page as normal.
+
   const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
@@ -140,13 +132,7 @@ export default function Projects() {
     });
   }, []);
 
-  // Track which card is at the start of the visible area, computed from
-  // scroll position directly. This tracks distance from scrollLeft (the
-  // left edge of the view), not the view's center — several cards are
-  // visible at once in a wide row, so "nearest to center" pointed at
-  // whichever card happened to be geometrically in the middle of that
-  // multi-card view rather than the first one, which is why the counter
-  // started at 2 instead of 1.
+
   useEffect(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;

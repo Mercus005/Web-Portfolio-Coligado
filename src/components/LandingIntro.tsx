@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 import { getImagePrefix } from "../../utils/utils";
 
 const COMMAND = "itsme";
+const NAME = "Cliff Marvic Coligado";
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*<>/";
 
 export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
   const [isExiting, setIsExiting] = useState(false);
   const [typed, setTyped] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [displayName, setDisplayName] = useState("");
 
   const handleEnter = () => {
     if (!isExiting) {
@@ -42,6 +45,43 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
     }, 90);
     return () => clearInterval(typeTimer);
   }, []);
+
+  // Terminal-decode effect: once the command resolves, the name un-scrambles
+  // left to right instead of just fading in. Skipped entirely for reduced
+  // motion, which jumps straight to the final text.
+  useEffect(() => {
+    if (!showResult) return;
+
+    if (reduceMotion) {
+      setDisplayName(NAME);
+      return;
+    }
+
+    let frame = 0;
+    const totalFrames = 16;
+
+    const scrambleTimer = setInterval(() => {
+      frame += 1;
+      const lockedCount = Math.ceil((frame / totalFrames) * NAME.length);
+      const next = NAME.split("")
+        .map((char, i) => {
+          if (char === " ") return " ";
+          if (i < lockedCount) return char;
+          return SCRAMBLE_CHARS[
+            Math.floor(Math.random() * SCRAMBLE_CHARS.length)
+          ];
+        })
+        .join("");
+      setDisplayName(next);
+
+      if (frame >= totalFrames) {
+        clearInterval(scrambleTimer);
+        setDisplayName(NAME);
+      }
+    }, 28);
+
+    return () => clearInterval(scrambleTimer);
+  }, [showResult, reduceMotion]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,13 +120,25 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
       transition={{ duration: 0.8 }}
       className="absolute inset-0 z-50 w-full h-screen bg-ink-950 text-paper overflow-hidden"
     >
-      {/* Ambient glow, kept subtle and behind everything */}
-      <div
+      {/* Ambient glow — now breathing slowly instead of sitting static */}
+      <motion.div
         aria-hidden
+        animate={
+          reduceMotion
+            ? {}
+            : { scale: [1, 1.15, 1], opacity: [0.2, 0.32, 0.2] }
+        }
+        transition={{ duration: 7, repeat: reduceMotion ? 0 : Infinity, ease: "easeInOut" }}
         className="pointer-events-none absolute -top-32 right-0 w-[560px] h-[560px] rounded-full bg-signal/20 blur-[120px]"
       />
-      <div
+      <motion.div
         aria-hidden
+        animate={
+          reduceMotion
+            ? {}
+            : { scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }
+        }
+        transition={{ duration: 9, repeat: reduceMotion ? 0 : Infinity, ease: "easeInOut", delay: 1.5 }}
         className="pointer-events-none absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-aqua/10 blur-[100px]"
       />
 
@@ -108,34 +160,46 @@ export default function LandingIntro({ onFinish }: { onFinish: () => void }) {
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={showResult ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-3 leading-tight"
           >
-            Cliff Marvic Coligado
+            {displayName || "\u00A0"}
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={showResult ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            initial={{ opacity: 0, y: 16, scale: 0.9 }}
+            animate={showResult ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={
+              reduceMotion
+                ? { duration: 0.2 }
+                : { type: "spring", stiffness: 260, damping: 18, delay: 0.75 }
+            }
             className="font-display text-lg sm:text-xl text-transparent bg-clip-text bg-gradient-to-r from-signal-light to-aqua mb-4"
           >
             Software Developer — Web · Mobile · Games · Etc
           </motion.p>
 
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={showResult ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={
+              reduceMotion
+                ? { duration: 0.2 }
+                : { type: "spring", stiffness: 260, damping: 18, delay: 0.9 }
+            }
             className="text-paper-muted text-base sm:text-lg mb-6 max-w-md mx-auto lg:mx-0"
           >
             A Computer Science graduate aiming to contribute to projects that make a difference. Come see what I have to offer.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={showResult ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            initial={{ opacity: 0, y: 16, scale: 0.85 }}
+            animate={showResult ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={
+              reduceMotion
+                ? { duration: 0.2 }
+                : { type: "spring", stiffness: 260, damping: 18, delay: 1.05 }
+            }
             className="flex flex-wrap items-center gap-3 sm:gap-4 mb-4 justify-center lg:justify-start"
           >
             <button

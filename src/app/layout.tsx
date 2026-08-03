@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Roboto, Space_Grotesk, JetBrains_Mono } from "next/font/google";
-import ClientLayout from "../components/ClientLayout"; // This contains your LandingIntro logic
+import ClientLayout from "../components/ClientLayout";
 
 const roboto = Roboto({
   subsets: ["latin"],
